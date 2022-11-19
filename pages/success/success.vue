@@ -10,7 +10,7 @@
 			<p style="margin: 20px; color: rgb(5 150 105)">我们将尽快安排人员与您联系，请保持电话畅通，再次感谢您的预约。</p>
 		</div>
 		<div  style="width: 100%; text-align: center; margin-top: 10px;">
-			<img src="@/static/wx-fk.jpg" style="margin-top: 20px; width: 70vw;"/>
+			<img src="@/static/wx-fk.jpg" style="margin-top: 20px; width: 80vw;"/>
 		</div>
 	</view>
 </template>

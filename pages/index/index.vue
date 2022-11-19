@@ -96,11 +96,11 @@
 						<uni-easyinput maxlength="11" type="number" name="postNumber" v-model="myfrom.postNumber"
 							placeholder="请输入手机号" />
 					</uni-forms-item>
-			<!-- 		<uni-forms-item label="验证码" required>
+					<uni-forms-item label="验证码" required>
 						<uni-easyinput maxlength="6" type="number" v-if="send_code" 
 							v-model="myfrom.captcha" placeholder="请输入短信验证码" />
 						<button v-if="!send_code" @click="sendSMS()" type="default">发送验证码</button>
-					</uni-forms-item> -->
+					</uni-forms-item>
 				<!-- 	<uni-forms-item label="推荐码">
 						<uni-easyinput maxlength="11" type="number" v-model="myfrom.recommender" name="recommender"
 							placeholder="请输入推荐人手机号" />
@@ -511,7 +511,6 @@
 			},
 			async checkCode() {
 				let _t = this;
-				return
 
 				if (_t.myfrom.code == '' || _t.myfrom.code.length != 6) {
 					uni.showModal({
@@ -602,14 +601,14 @@
 				if (!_t.checkPhone()) {
 					return;
 				}
-				// if (_t.myfrom.captcha == '') {
-				// 	uni.showToast({
-				// 		icon: 'none',
-				// 		title: '请填写短信验证码',
-				// 		duration: 2000
-				// 	});
-				// 	return;
-				// }
+				if (_t.myfrom.captcha == '') {
+					uni.showToast({
+						icon: 'none',
+						title: '请填写短信验证码',
+						duration: 2000
+					});
+					return;
+				}
 				if (_t.myfrom.postAddress == '') {
 					uni.showToast({
 						icon: 'none',
