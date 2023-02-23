@@ -1,0 +1,58 @@
+{
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"fui-(.*)": "@/components/firstui/fui-$1/fui-$1.vue",
+			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+		}
+	},
+	"pages": [
+		{
+			"path": "pages/pay/index",
+			"style": {
+				"navigationBarTitleText": "封装"
+			}
+		},
+
+		{
+			"path": "pages/pay/curettage",
+			"style": {
+				"navigationBarTitleText": "刮刮乐"
+			}
+		},
+		{
+			"path": "pages/demo/org",
+			"style": {
+				"navigationBarTitleText": "乾昭通信"
+			}
+		},
+
+
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "乾昭通信"
+			}
+		},
+		{
+			"path": "pages/index/success",
+			"style": {
+				"navigationBarTitleText": "乾昭通信"
+			}
+		},
+
+		{
+			"path": "pages/pay/list",
+			"style": {
+				"navigationBarTitleText": "刮刮乐"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationStyle": "custom",
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "乾昭通信",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}

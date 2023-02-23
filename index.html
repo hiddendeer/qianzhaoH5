@@ -15,6 +15,15 @@
   </head>
   <body>
     <div id="app"><!--app-html--></div>
-    <script type="module" src="/main.js"></script>
+    <script type="module" src="/src/main.js"></script>
   </body>
+  <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+<script>
+  // VConsole 默认会挂载到 `window.VConsole` 上
+  var vConsole = new window.VConsole();
+  // 接下来即可照常使用 `console` 等方法
+	console.log('Hello world');
+
+</script>
+
 </html>
