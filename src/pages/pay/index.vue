@@ -2,15 +2,8 @@
   <div class="content">
     <div class="pt-[35vh] overflow-y-hidden">
       <div class="w-[80%] m-auto">
-        <fui-input
-          v-model="phoneValue"
-          :modelValue="phoneValue"
-          placeholder="请输入手机号"
-          placeholder-style="color:#ccc;"
-          color="#fda085"
-          :inputBorder="true"
-          :padding="['16rpx', '28rpx']"
-        >
+        <fui-input v-model="phoneValue" :modelValue="phoneValue" placeholder="请输入手机号" placeholder-style="color:#ccc;"
+          color="#fda085" :inputBorder="true" :padding="['16rpx', '28rpx']">
           <template v-slot:left>
             <view class="pr-[15rpx]">
               <fui-icon name="mobile" :size="48"></fui-icon>
@@ -18,22 +11,15 @@
           </template>
         </fui-input>
         <div class="mt-[50rpx]">
-          <fui-button
-            class="!m-auto"
-            type="warning"
-            background="linear-gradient(120deg, #f6d365 0%, #fda085 100%)"
-            @click="_clickCheck"
-            radius="10px"
-            width="95%"
-            height="35px"
-          >
-            立即参与</fui-button
-          >
+          <fui-button class="!m-auto" type="warning" background="linear-gradient(120deg, #f6d365 0%, #fda085 100%)"
+            @click="_clickCheck" radius="10px" width="95%" height="35px">
+            立即参与</fui-button>
         </div>
       </div>
     </div>
   </div>
-   <fui-toast ref="toastRef"></fui-toast>
+  <fui-toast ref="toastRef"></fui-toast>
+  <fui-dialog :show="show" :content="content" title="提示" maskClosable @click="onClick" @close="onClose"></fui-dialog>
 </template>
 
 <script setup>
@@ -45,6 +31,8 @@ import { onLoad } from "@dcloudio/uni-app";
 
 const phoneValue = ref("");
 const toastRef = ref(null);
+const show = ref(false);
+const content = ref('该手机号非乾昭用户，请跳转至平台注册。');
 
 onMounted(() => {
   getConfig();
@@ -75,46 +63,24 @@ const getOpenid = async (code) => {
   }
 };
 
-// 提交支付
-const postRechargeOrder = async () => {
-  const payRes = await api.postRechargeOrder({
-    openid: uni.getStorageSync("openid"),
-    phone: "15366197090",
-    money: 100,
-    pay_money: 1,
-    coupon_id: "",
-  });
-  if (payRes.errorCode == "") {
-    console.log(payRes?.data);
-    wx.chooseWXPay({
-      timestamp: payRes?.data?.timeStamp, // 支付签名时间戳，注意微信 jssdk 中的所有使用 timestamp 字段均为小写。但最新版的支付后台生成签名使用的 timeStamp 字段名需大写其中的 S 字符
-      nonceStr: payRes?.data?.nonceStr, // 支付签名随机串，不长于 32 位
-      package: payRes?.data?.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=\*\*\*）
-      signType: payRes?.data?.signType, // 微信支付V3的传入 RSA ,微信支付V2的传入格式与V2统一下单的签名格式保持一致
-      paySign: payRes?.data?.paySign, // 支付签名
-      success: function (res) {
-        console.log(res);
-        // 支付成功后的回调函数
-      },
-    });
-  }
-};
+
 
 // 校验
 const _clickCheck = async () => {
-  if (phoneValue.value == '') {
-    toastRef.value.show({ text: "请输入手机号" });
+  if (!/^(?:13\d|14\d|15\d|16\d|17\d|18\d|19\d)\d{5}(\d{3}|\*{3})$/.test(phoneValue.value)) {
+    toastRef.value.show({ text: "请输入正确的手机号" });
     return;
   }
-  const res = await api.checkPhoneChannel();
-  if (res.errorCode) {
+  const res = await api.checkPhoneChannel({
+    oepnid: uni.getStorageSync("openid"),
+    phone: phoneValue.value
+  });
+  if (res.errorCode == '') {
     uni.navigateTo({
-      url: "/pages/pay/curettage?phone=" + phoneValue.value+"&openid="+uni.getStorageSync("openid"),
+      url: "/pages/pay/curettage?phone=" + phoneValue.value + "&openid=" + uni.getStorageSync("openid"),
     });
   } else {
-    uni.navigateTo({
-      url: "/pages/index/index",
-    });
+    show.value = true;
   }
 };
 
@@ -125,13 +91,24 @@ const getURLParameters = (url) =>
     ),
     {}
   );
+
+const onClick = (e) => {
+  if (e.index == `1`) {
+    window.location.href = `http://pc.qztele.com/h5/#/`;
+  } else {
+    show.value = false;
+  }
+}
+const onClose = () => {
+  show.value = false;
+}
 </script>
 
 <style lang="scss" scoped>
 .content {
   position: relative;
   height: 100vh;
-  // background-image: url('https://qztele-1251945399.cos.ap-nanjing.myqcloud.com/qztele/%E9%AA%8C%E8%AF%81%E9%9D%A2.jpg');
+  background-image: url('https://qztele-1251945399.cos.ap-nanjing.myqcloud.com/qztele/%E9%AA%8C%E8%AF%81%E9%9D%A2.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
 
@@ -140,6 +117,7 @@ const getURLParameters = (url) =>
     right: 50rpx;
   }
 }
+
 :deep(.fui-input__border::after) {
   border: 1px solid var(--fui-color-border, #b3b3b3);
 }
@@ -149,14 +127,10 @@ const getURLParameters = (url) =>
   height: 200rpx;
   position: relative;
   filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.2));
-  background: radial-gradient(circle at right top, transparent 6px, #fff 0) top
-      left/30% 50% no-repeat,
-    radial-gradient(circle at right bottom, transparent 6px, #fff 0) bottom
-      left/90px 52% no-repeat,
-    radial-gradient(circle at left top, transparent 6px, #fff 0) top right/209px
-      51% no-repeat,
-    radial-gradient(circle at left bottom, transparent 6px, #fff 0) bottom
-      right/209px 51% no-repeat;
+  background: radial-gradient(circle at right top, transparent 6px, #fff 0) top left/30% 50% no-repeat,
+    radial-gradient(circle at right bottom, transparent 6px, #fff 0) bottom left/90px 52% no-repeat,
+    radial-gradient(circle at left top, transparent 6px, #fff 0) top right/209px 51% no-repeat,
+    radial-gradient(circle at left bottom, transparent 6px, #fff 0) bottom right/209px 51% no-repeat;
   border-radius: 4px;
 }
 

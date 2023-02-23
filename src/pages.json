@@ -10,7 +10,7 @@
 		{
 			"path": "pages/pay/index",
 			"style": {
-				"navigationBarTitleText": "封装"
+				"navigationBarTitleText": "充值"
 			}
 		},
 
