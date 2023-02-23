@@ -57,7 +57,7 @@
                   </div>
                 </div>
                 <div class="flex-[2] font-bold mt-[50rpx]">
-                  <div><span class="text-#666666">折扣金额：</span> {{ item.calcMoney || 0 }} 元</div>
+                  <div><span class="text-#666666">优惠金额：</span> <span class="text-32rpx text-[#f76260]">{{ item.preMoney || 0 }}</span>  元</div>
                   <div class="mt-[10rpx]">
                     <span class="text-#666666">使用状态：</span>
                     <span v-if="item.used" class="text-#f59e0b">已使用</span>
@@ -180,6 +180,7 @@ const getPhoneCoupon = async () => {
     res.data.forEach(item => {
       if (!item.used) {
         item.calcMoney = currentTC.value * item.discount / 10;
+        item.preMoney = currentTC.value - (currentTC.value * item.discount / 10);
         list.push(item)
       }
     })
@@ -194,6 +195,10 @@ const getPhoneCoupon = async () => {
 
 const changeRadio = (e) => {
   selectRadio.value = e.value;
+  const findObj = couponList.value.find(item => item.uuid == selectRadio.value);
+  if (findObj) {
+    payMoney.value = findObj.calcMoney;
+  }
 };
 
 const getPhoneCouponTimes = async () => {
@@ -208,6 +213,7 @@ const getPhoneCouponTimes = async () => {
 };
 
 const _clickCheck = () => {
+  getPhoneCoupon();
   showPopup.value = true;
 };
 const closePopup = () => {
@@ -224,7 +230,7 @@ const completeFunction = async (e) => {
   }
   if (num.value > 0) {
     const res = await api.genPhoneCoupon({
-      openid: "oxTpk6uPC-MyF1CrPu4GWModxPjU",
+      openid: uni.getStorageSync("openid"),
       phone: phone.value,
     });
     if (res.errorCode == "") {
@@ -265,7 +271,12 @@ const changeMoney = (e) => {
   currentTC.value = e.detail.value;
   couponList.value.forEach(item => {
     item.calcMoney = e.detail.value * item.discount / 10;
+    item.preMoney = currentTC.value - (currentTC.value * item.discount / 10);
   })
+  const findObj = couponList.value.find(item => item.uuid == selectRadio.value);
+  if (findObj) {
+    payMoney.value = findObj.calcMoney;
+  }
 };
 </script>
 

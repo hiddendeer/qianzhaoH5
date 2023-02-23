@@ -75,7 +75,7 @@ const _clickCheck = async () => {
     oepnid: uni.getStorageSync("openid"),
     phone: phoneValue.value
   });
-  if (res.errorCode == '') {
+  if (res.errorCode=="") {
     uni.navigateTo({
       url: "/pages/pay/curettage?phone=" + phoneValue.value + "&openid=" + uni.getStorageSync("openid"),
     });
