@@ -129,6 +129,7 @@ onLoad((e) => {
   }
   getPhoneCouponTimes();
   getPhoneCoupon();
+  // getConfig();
 });
 
 // 提交支付
@@ -142,7 +143,7 @@ const postRechargeOrder = async () => {
     openid: uni.getStorageSync("openid"),
     phone: findObj.phone,
     money: currentTC.value,
-    pay_money: 0.01,
+    pay_money: findObj.calcMoney,
     coupon_id: findObj.uuid,
   });
   if (payRes.errorCode == "") {
@@ -164,9 +165,35 @@ const postRechargeOrder = async () => {
         }, 1500)
 
       },
+      cancel: function () {
+        cancelTrigger(payRes?.data?.qz_order_id);
+      }
     });
   } else {
     toastRef.value.show({ text: payRes.errorMessage });
+  }
+};
+
+// 取消回调
+const cancelTrigger = async (qz_order_id) => {
+  const res = await api.cancelPayRechargeOrder({qz_order_id});
+  if (res.errorCode != '') {
+    toastRef.value.show({ text: res.errorMessage });
+  } 
+  getPhoneCoupon();
+}
+
+const getConfig = async () => {
+  const res = await api.getJsapiTicketSign();
+  if (res.errorCode == "") {
+    wx.config({
+      // debug: true, // 开启调试模式,调用的所有 api 的返回值会在客户端 alert 出来，若要查看传入的参数，可以在 pc 端打开，参数信息会通过 log 打出，仅在 pc 端时才会打印。
+      appId: res?.data?.appId, // 必填，公众号的唯一标识
+      timestamp: res?.data?.timestamp, // 必填，生成签名的时间戳
+      nonceStr: res?.data?.nonceStr, // 必填，生成签名的随机串
+      signature: res?.data?.signature, // 必填，签名
+      jsApiList: ["chooseWXPay"], // 必填，需要使用的 JS 接口列表
+    });
   }
 };
 
@@ -203,7 +230,7 @@ const changeRadio = (e) => {
 
 const getPhoneCouponTimes = async () => {
   const res = await api.getPhoneCouponTimes({
-    openid: "oxTpk6uPC-MyF1CrPu4GWModxPjU",
+    openid: uni.getStorageSync("openid"),
     phone: phone.value,
   });
   if (res.errorCode == "") {
@@ -213,6 +240,10 @@ const getPhoneCouponTimes = async () => {
 };
 
 const _clickCheck = () => {
+  if (couponList.value.length == '0') {
+    toastRef.value.show({ text: "您还没有优惠券，请先参与活动" });
+    return;
+  }
   getPhoneCoupon();
   showPopup.value = true;
 };
@@ -239,6 +270,7 @@ const completeFunction = async (e) => {
       discount.value = res.data.discount;
       resText.value = discount.value + "折优惠";
       num.value--;
+      getPhoneCoupon();
     } else {
       resText.value = "没有了";
       toastRef.value.show({ text: res.errorMessage });

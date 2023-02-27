@@ -50,4 +50,11 @@ export default class api {
         data
       })
     }
+    static cancelPayRechargeOrder (data) {
+      return http.request({
+        url: '/api/recharge/cancelPayRechargeOrder',
+        method: 'post',
+        data
+      })
+    }
   }

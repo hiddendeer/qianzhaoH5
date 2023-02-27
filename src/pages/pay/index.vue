@@ -32,7 +32,7 @@ import { onLoad } from "@dcloudio/uni-app";
 const phoneValue = ref("");
 const toastRef = ref(null);
 const show = ref(false);
-const content = ref('该手机号非乾昭用户，请跳转至平台注册。.');
+const content = ref('');
 
 onMounted(() => {
   getConfig();
@@ -80,6 +80,7 @@ const _clickCheck = async () => {
       url: "/pages/pay/curettage?phone=" + phoneValue.value + "&openid=" + uni.getStorageSync("openid"),
     });
   } else {
+    content.value = "尊敬的【"+phoneValue.value+"】，该号码并非乾昭渠道号卡，点击确定立即办理，享受专属充值活动。";
     show.value = true;
   }
 };

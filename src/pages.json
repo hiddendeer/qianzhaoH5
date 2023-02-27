@@ -8,6 +8,12 @@
 	},
 	"pages": [
 		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "乾昭通信"
+			}
+		},
+		{
 			"path": "pages/pay/index",
 			"style": {
 				"navigationBarTitleText": "充值"
@@ -28,12 +34,7 @@
 		},
 
 
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "乾昭通信"
-			}
-		},
+
 		{
 			"path": "pages/index/success",
 			"style": {

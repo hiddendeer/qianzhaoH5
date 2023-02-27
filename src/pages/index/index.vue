@@ -88,7 +88,8 @@
 
     </div>
     <div class="bottom-img_content">
-      <img src="https://qztele-1251945399.cos.ap-nanjing.myqcloud.com/qztele/%E4%BB%8B%E7%BB%8D%E5%9B%BE%20.png" style="width: 100%;height: 100%;" alt="">
+      <img src="https://qztele-1251945399.cos.ap-nanjing.myqcloud.com/qztele/%E7%BD%91%E7%AB%99%E5%BA%95%E9%83%A8%E8%AF%A6%E6%83%85%E9%A1%B5%E5%9B%BE.png" style="width: 100%;height: 100%;" alt="">
+      <!-- <img src="https://qztele-1251945399.cos.ap-nanjing.myqcloud.com/qztele/%E4%BB%8B%E7%BB%8D%E5%9B%BE%20.png" style="width: 100%;height: 100%;" alt=""> -->
       <!-- <img src="https://qztele-1251945399.cos.ap-nanjing.myqcloud.com/qztele/%E6%B0%B4%E5%A2%A8%E9%95%BF%E5%9B%BE%E4%BF%AE%E6%94%B9-01-01.png" style="width: 100%;height: 100%;" alt=""> -->
     </div>
   </div>
