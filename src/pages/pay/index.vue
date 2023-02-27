@@ -32,7 +32,7 @@ import { onLoad } from "@dcloudio/uni-app";
 const phoneValue = ref("");
 const toastRef = ref(null);
 const show = ref(false);
-const content = ref('该手机号非乾昭用户，请跳转至平台注册。');
+const content = ref('该手机号非乾昭用户，请跳转至平台注册。.');
 
 onMounted(() => {
   getConfig();
