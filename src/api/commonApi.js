@@ -24,7 +24,8 @@ export default class commonApi {
     }
     static postCbOrder (data) {
       return http.request({
-        url: '/api/orders/postCbOrder',
+        // url: '/api/orders/postCbOrder',
+        url: '/api/orders/postOrderV2',
         method: 'POST',
         data
       })
@@ -32,6 +33,13 @@ export default class commonApi {
     static getOpenid (data) {
       return http.request({
         url: '/api/getOpenid',
+        method: 'get',
+        data
+      })
+    }
+    static queryOrder (data) {
+      return http.request({
+        url: '/api/orders/queryOrder',
         method: 'get',
         data
       })

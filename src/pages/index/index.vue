@@ -88,9 +88,9 @@
 
     </div>
     <div class="bottom-img_content">
-      <img src="https://qztele-1251945399.cos.ap-nanjing.myqcloud.com/qztele/%E7%BD%91%E7%AB%99%E5%BA%95%E9%83%A8%E8%AF%A6%E6%83%85%E9%A1%B5%E5%9B%BE.png" style="width: 100%;height: 100%;" alt="">
+      <!-- <img src="https://qztele-1251945399.cos.ap-nanjing.myqcloud.com/qztele/%E7%BD%91%E7%AB%99%E5%BA%95%E9%83%A8%E8%AF%A6%E6%83%85%E9%A1%B5%E5%9B%BE.png" style="width: 100%;height: 100%;" alt=""> -->
       <!-- <img src="https://qztele-1251945399.cos.ap-nanjing.myqcloud.com/qztele/%E4%BB%8B%E7%BB%8D%E5%9B%BE%20.png" style="width: 100%;height: 100%;" alt=""> -->
-      <!-- <img src="https://qztele-1251945399.cos.ap-nanjing.myqcloud.com/qztele/%E6%B0%B4%E5%A2%A8%E9%95%BF%E5%9B%BE%E4%BF%AE%E6%94%B9-01-01.png" style="width: 100%;height: 100%;" alt=""> -->
+      <img src="https://qztele-1251945399.cos.ap-nanjing.myqcloud.com/qztele/%E6%B0%B4%E5%A2%A8%E9%95%BF%E5%9B%BE%E4%BF%AE%E6%94%B9-01-01.png" style="width: 100%;height: 100%;" alt="">
     </div>
   </div>
   <!-- <uni-data-picker ref="refPicker" v-model="selectValue" v-show="showPicker" placeholder="请选择地区" popup-title="请选择所在地区"
@@ -150,6 +150,9 @@
     </div>
   </fui-bottom-popup>
   <fui-toast ref="refToast"></fui-toast>
+  <div class="absolute top-[10px] right-[-8px]">
+    <fui-tag text="查询订单" @click="viewOrder" radius="40"></fui-tag>
+  </div>
 </template>
 
 <script setup>
@@ -386,6 +389,12 @@ const handleClose = () => {
 const closePopup = () => {
   showPopup.value = false;
 };
+const viewOrder = () => {
+  uni.navigateTo({
+        url: '/pages/order/index'
+      })
+
+}
 </script>
 
 <style lang="scss" scoped>
@@ -425,8 +434,8 @@ const closePopup = () => {
 }
 
 .imgUrl {
-  // background-image: url('https://qztele-1251945399.cos.ap-nanjing.myqcloud.com/qztele/%E4%B8%8A%E5%BA%95%E5%9B%BE-01.png');
-  background-image: url('https://qztele-1251945399.cos.ap-nanjing.myqcloud.com/qztele/%E9%A1%B6%E5%9B%BE.jpg');
+  background-image: url('https://qztele-1251945399.cos.ap-nanjing.myqcloud.com/qztele/%E4%B8%8A%E5%BA%95%E5%9B%BE-01.png');
+  //background-image: url('https://qztele-1251945399.cos.ap-nanjing.myqcloud.com/qztele/%E9%A1%B6%E5%9B%BE.jpg');
   background-repeat: no-repeat;
   // background-size: auto 100%;
   background-size: 100% 100%;

@@ -32,8 +32,8 @@ export default defineConfig({
     open:true,
     proxy: {
       "/api": {
-        // target: "http://120.48.115.253:18080",
-        target: "http://www.qztele.com",
+        target: "http://120.48.115.253:18080",
+        // target: "http://www.qztele.com",
         changeOrigin: true,
         // rewrite: (path) => path.replace(/^\/api/, "api"),
       },

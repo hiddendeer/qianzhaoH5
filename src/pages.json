@@ -14,6 +14,12 @@
 			}
 		},
 		{
+			"path": "pages/order/index",
+			"style": {
+				"navigationBarTitleText": "订单信息"
+			}
+		},
+		{
 			"path": "pages/pay/index",
 			"style": {
 				"navigationBarTitleText": "充值"
