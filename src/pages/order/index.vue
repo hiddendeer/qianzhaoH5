@@ -67,6 +67,16 @@
               <span style="color: #969799">套餐</span>
               <span>{{ item.plan_name }}</span>
             </div>
+            <div
+              style="
+                padding-bottom: 10px;
+                display: flex;
+                justify-content: space-between;
+              "
+            >
+              <span style="color: #969799">订单来源</span>
+              <span>{{ item.distributor_name }}</span>
+            </div>
             <div style="display: flex; justify-content: space-between">
               <div style="color: #969799">选购号码</div>
               <div>{{ item.number }}</div>
@@ -98,8 +108,8 @@ const fabs = ref([]);
 const orderData = ref([]);
 
 const formParam = ref({
-  certId: "320623199508193038",
-  postNumber: "15366197000",
+  certId: "",
+  postNumber: "",
 });
 
 // 跳转到客服中心
