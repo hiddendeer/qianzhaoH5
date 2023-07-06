@@ -1,27 +1,31 @@
 <template>
-    <div class="h-[100vh] pt-[290rpx] bg-white">
-        <fui-form ref="form" :show="false">
-            <fui-form-item label="姓名" asterisk>
+    <div class="h-[100vh]  bg-white">
+      <img class="h-[300rpx] w-full" src="@/assets/image/banner.jpg" alt="">
+        <fui-form class="mt-[40rpx]" ref="form" :show="false">
+            <fui-form-item label="姓名" asterisk :labelSize="28">
                 <fui-input
                   v-model="formParam.full_name"
+                  :size="28"
                   :borderBottom="false"
                   :padding="[0]"
                   class="fui-page__input"
                   placeholder="请输入（必填）"
                 />
               </fui-form-item>
-              <fui-form-item label="身份证" asterisk>
+              <fui-form-item label="身份证" asterisk :labelSize="28">
                 <fui-input
                   v-model="formParam.cert_no"
+                  :size="28"
                   :borderBottom="false"
                   :padding="[0]"
                   class="fui-page__input"
                   placeholder="请输入（已加密）"
                 />
               </fui-form-item>
-            <fui-form-item label="手机号" asterisk>
+            <fui-form-item label="手机号" asterisk :labelSize="28">
                 <fui-input
                   v-model="formParam.phone"
+                  :size="28"
                   :borderBottom="false"
                   :padding="[0]"
                   class="fui-page__input"
@@ -29,7 +33,7 @@
                 />
               </fui-form-item>
               <fui-form-item label="">
-                <fui-textarea v-model="formParam.address" height="150rpx" flexStart label="地址"
+                <fui-textarea v-model="formParam.address" height="150rpx" flexStart label="地址" :size="28" :labelSize="28"
                   placeholder="请输入详细地址" :borderTop="false" :borderBottom="false" :padding="[0]"></fui-textarea>
               </fui-form-item>
       

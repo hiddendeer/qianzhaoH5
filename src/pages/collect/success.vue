@@ -12,7 +12,7 @@ import {ref} from "vue";
 
 const backGo = () => {
     uni.redirectTo({
-	url: '/pages/index/index'
+	url: '/pages/collect/index'
 });
 }
 
